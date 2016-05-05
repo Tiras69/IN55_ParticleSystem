@@ -1,9 +1,7 @@
 ﻿#include "TP01.h"
 
 
-#include "Shapes/Basis.h"
-#include "Shapes/cylinder.h"
-#include "Shapes/Cube.h"
+
 
 #include <iostream>
 #include <ctime>
@@ -11,17 +9,7 @@
 
 using namespace std;
 
-double deltaTime;
-clock_t end;
-clock_t start;
 
-Basis* g_Basis;
-Cube * Tete;
-Cube * Torse;
-Cube * BrasDroit;
-Cube * BrasGauche;
-Cube * JambeDroite;
-Cube * JambeGauche;
 
 
 TP01::TP01()
@@ -77,9 +65,7 @@ TP01::initializeObjects()
 	return true;
 }
 
-float degrePerSecond = 180.0f;
-float currentAngle = 0.0f;
-bool negatif = false;
+
 
 void
 TP01::render()

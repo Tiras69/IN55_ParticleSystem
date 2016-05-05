@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
     //GrueWindow win;
     //win.show();
 
-    TestCamera win;
-    win.show();
+    //TestCamera win;
+    //win.show();
 
 	return app.exec();
 }

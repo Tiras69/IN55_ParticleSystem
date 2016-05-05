@@ -27,7 +27,24 @@ HEADERS += \
     src/gruewindow.h \
     ../Common/quaternion.h \
     ../Common/camera.h \
-    src/testcamera.h
+    src/testcamera.h \
+    src/Particle/particlesystem.h \
+    src/Particle/objectpool.h \
+    src/Particle/particletransform.h \
+    src/Particle/renderer.h \
+    src/Particle/shapeemitter.h \
+    src/Particle/sphereemitter.h \
+    src/Particle/texturedquad.h \
+    src/Particle/boxemitter.h \
+    src/Particle/coneemitter.h \
+    src/particlewindow.h \
+    src/SOIL/image_DXT.h \
+    src/SOIL/image_helper.h \
+    src/SOIL/SOIL.h \
+    src/SOIL/stbi_DDS_aug.h \
+    src/SOIL/stbi_DDS_aug_c.h \
+    src/SOIL/stb_image_aug.h
+
 
 SOURCES += \
     ../Common/GlFramework.cpp \
@@ -42,7 +59,22 @@ SOURCES += \
     src/gruewindow.cpp \
     ../Common/quaternion.cpp \
     ../Common/camera.cpp \
-    src/testcamera.cpp
+    src/testcamera.cpp \
+    src/Particle/particlesystem.cpp \
+    src/Particle/objectpool.cpp \
+    src/Particle/particletransform.cpp \
+    src/Particle/renderer.cpp \
+    src/Particle/shapeemitter.cpp \
+    src/Particle/sphereemitter.cpp \
+    src/Particle/texturedquad.cpp \
+    src/Particle/boxemitter.cpp \
+    src/Particle/coneemitter.cpp \
+    src/particlewindow.cpp \
+    src/SOIL/image_DXT.c \
+    src/SOIL/image_helper.c \
+    src/SOIL/SOIL.c \
+    src/SOIL/stb_image_aug.c
+
 
 unix:!macx: LIBS += -L$$PWD/../glew-mingw/lib/ -lGLEW
 

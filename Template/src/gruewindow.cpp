@@ -1,8 +1,6 @@
 #include "gruewindow.h"
 
-#include "Shapes/Basis.h"
-#include "Shapes/cylinder.h"
-#include "Shapes/Cube.h"
+
 
 #include <iostream>
 #include <ctime>
@@ -10,22 +8,7 @@
 
 using namespace std;
 
-Basis * basis;
 
-Cube * cube1;
-Cube * cube2;
-Cube * cube3;
-Cylinder * cyl1;
-Cylinder * cyl2;
-
-float H1 = 5.0f;
-float H2 = 2.0f;
-float H3 = 7.0f;
-float H4 = 3.0f;
-float L1 = 3.0f;
-float L2 = 10.0f;
-float L3 = 5.0f;
-float P1 = 2.0f;
 
 GrueWindow::GrueWindow()
 {

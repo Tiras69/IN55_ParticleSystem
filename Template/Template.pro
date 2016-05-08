@@ -82,3 +82,6 @@ INCLUDEPATH += $$PWD/../glew-mingw/include
 DEPENDPATH += $$PWD/../glew-mingw/include
 
 unix:!macx: PRE_TARGETDEPS += $$PWD/../glew-mingw/lib/libGLEW.a
+
+OTHER_FILES += \
+    Resources/CHATON.jpg

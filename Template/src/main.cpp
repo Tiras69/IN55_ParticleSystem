@@ -13,6 +13,7 @@
 #include "TP01.h"
 #include "gruewindow.h"
 #include "testcamera.h"
+#include "particlewindow.h"
 
 #include <QApplication>
 
@@ -28,6 +29,9 @@ int main(int argc, char *argv[])
 
     //TestCamera win;
     //win.show();
+
+    ParticleWindow win;
+    win.show();
 
 	return app.exec();
 }

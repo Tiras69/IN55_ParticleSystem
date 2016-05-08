@@ -1,14 +1,14 @@
-#version 130
-
+#version 150 core
 
 in vec3 fColor;
-in vec2 Texcoord;
+in vec2 TexCoord;
+
+uniform float opacity;
+uniform sampler2D image;
 
 out vec4 fragColor;
 
-uniform sampler2D tex;
-
 void main()
 {
-  fragColor = texture(tex, Texcoord) * vec4( fColor, 1.0f );
+  fragColor = vec4(texture(image, TexCoord).rgb * fColor.rgb, opacity);
 }

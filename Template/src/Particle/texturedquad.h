@@ -6,21 +6,29 @@
 #include "renderer.h"
 
 
-class TexturedQuad : public Renderer
+class TexturedQuad : public Object3D
 {
 public:
     TexturedQuad();
+
+    GLfloat opacity;
+protected:
+    void drawShape();
+
+
 
 private :
 
     unsigned char * image;
     int imageWidth;
     int imageHeight;
+    int channels;
 
     GLuint texID;
-    GLfloat * tabVertices[4*3];
-    GLfloat * tabIndices[2*3];
-    GLfloat * UVCoordinates[2*3];
+    GLfloat tabVertices[6*3];
+    GLuint tabIndices[2*3];
+    GLfloat UVCoordinates[6*2];
+    GLfloat tabColor[6*3];
 };
 
 #endif // TEXTUREDQUAD_H

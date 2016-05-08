@@ -75,12 +75,12 @@ void Cube::drawShape(){
 
     GLint var1 = glGetAttribLocation( m_Framework->getCurrentShaderId(), "position" );
     glEnableVertexAttribArray( var1 );
-    glVertexAttribPointer( var1, 3, GL_FLOAT, GL_FALSE, 0, m_TabVertices );
-    GLint var2 = glGetAttribLocation( m_Framework->getCurrentShaderId(), "color" );
-    glEnableVertexAttribArray( var2 );
-    glVertexAttribPointer( var2, 3, GL_FLOAT, GL_FALSE, 0, m_TabColors );
-    //glDrawArrays( GL_LINES, 0, 6 );
-    glDrawElements(GL_TRIANGLES, 6*3*2, GL_UNSIGNED_INT, m_TabIndices);
-    glDisableVertexAttribArray( var1 );
+        glVertexAttribPointer( var1, 3, GL_FLOAT, GL_FALSE, 0, m_TabVertices );
+        GLint var2 = glGetAttribLocation( m_Framework->getCurrentShaderId(), "color" );
+        glEnableVertexAttribArray( var2 );
+            glVertexAttribPointer( var2, 3, GL_FLOAT, GL_FALSE, 0, m_TabColors );
+
+            glDrawElements(GL_TRIANGLES, 6*3*2, GL_UNSIGNED_INT, m_TabIndices);
+        glDisableVertexAttribArray( var1 );
     glDisableVertexAttribArray( var2 );
 }

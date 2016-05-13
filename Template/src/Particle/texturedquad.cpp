@@ -6,8 +6,8 @@
 TexturedQuad::TexturedQuad()
 {
     /* Vertices Stuff */
-    GLfloat tmptabVertices[] = {10.0f, 10.0f, 0.0f,  -10.0f, 10.0f, 0.0f,  -10.0f, -10.0f, 0.0f,
-                               10.0f, 10.0f, 0.0f,  -10.0f, -10.0f, 0.0f,  10.0f, -10.0f, 0.0f,};
+    GLfloat tmptabVertices[] = {1.0f, 1.0f, 0.0f,  -1.0f, 1.0f, 0.0f,  -1.0f, -1.0f, 0.0f,
+                               1.0f, 1.0f, 0.0f,  -1.0f, -1.0f, 0.0f,  1.0f, -1.0f, 0.0f,};
 
     GLuint tmptabIndices[] = {0, 1, 2,  3, 4, 5};
 

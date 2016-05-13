@@ -1,18 +1,29 @@
 #include "particlewindow.h"
+#include "Particle/particletransform.h"
 
+#include <unistd.h>
 #include <iostream>
 
 using namespace std;
 
+ParticleTransform * ref_transf;
+
 ParticleWindow::ParticleWindow()
 {
-    cout << "yey" << endl;
     quad = new TexturedQuad();
-    cout << "yey" << endl;
+
+    pool = new ObjectPool(1);
+
+
+
+    ref_transf = pool->getObject();
+    ref_transf->Start();
+    timeStart = clock();
 }
 
 ParticleWindow::~ParticleWindow(){
     delete quad;
+    delete pool;
 }
 
 void ParticleWindow::keyPressEvent(QKeyEvent *event){
@@ -50,17 +61,36 @@ bool ParticleWindow::initializeObjects(){
 
 }
 
-
 void ParticleWindow::render(){
+    timeStart = clock();
+
+    //frameTime = clock();
+    //float deltaTime = ((float)timeEnd - timeStart) / CLOCKS_PER_SEC;
+
+
+    //std::cout << " TIME : " << deltaTime << std::endl;
 
     lookAt(0, 5, -30, 0, 0, 0);
 
-
     pushMatrix();
-        quad->draw();
-        //translate(0.0f, 0.0f, 10.0f);
-        //quad->draw();
+
+        //std::cout << "POSITION : " << ref_transf->position.x << " " << ref_transf->position.y << " " << ref_transf->position.z << std::endl;
+        addCustomTransform(ref_transf->ModelMatrix);
+        if(ref_transf->isEnable)
+            quad->draw();
+        else
+            ref_transf->Start();
+
+        ref_transf->Update(1.0f/30.f);
     popMatrix();
+
+    timeEnd = clock();
+    clock_t frameTime = timeEnd - timeStart;
+    float frameRate = 1.0f / 30.0f;
+    float framefTime = ((float)frameTime) / CLOCKS_PER_SEC;
+
+    if(framefTime < frameRate)
+        usleep((frameRate - framefTime) * 1000000);
 }
 
 

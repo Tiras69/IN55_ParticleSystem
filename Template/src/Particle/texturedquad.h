@@ -6,7 +6,7 @@
 #include "renderer.h"
 
 
-class TexturedQuad : public Object3D
+class TexturedQuad : public Renderer, public Object3D
 {
 public:
     TexturedQuad();
@@ -19,16 +19,7 @@ protected:
 
 private :
 
-    unsigned char * image;
-    int imageWidth;
-    int imageHeight;
-    int channels;
 
-    GLuint texID;
-    GLfloat tabVertices[6*3];
-    GLuint tabIndices[2*3];
-    GLfloat UVCoordinates[6*2];
-    GLfloat tabColor[6*3];
 };
 
 #endif // TEXTUREDQUAD_H

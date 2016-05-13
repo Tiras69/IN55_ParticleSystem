@@ -1,21 +1,20 @@
 #ifndef OBJECTPOOL_H
 #define OBJECTPOOL_H
 
+#include "particletransform.h"
 #include <vector>
 
-template<typename T>
 class ObjectPool
 {
 public:
     ObjectPool(int n);
 
-    T getObject();
-    void disableObject(int n);
+    ParticleTransform* getObject();
+
 
 private :
     int ObjectNumber;
-    std::vector<T>  objects;
-    std::vector<bool>  enabledVect;
+    std::vector<ParticleTransform> objects;
 };
 
 #endif // OBJECTPOOL_H

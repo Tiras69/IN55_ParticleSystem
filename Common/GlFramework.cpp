@@ -440,6 +440,10 @@ GlFramework::loadIdentity()
     pModelMatrix.setIdentity();
 }
 
+void GlFramework::addCustomTransform(GLMatrix trans){
+    pModelMatrix = pModelMatrix * trans;
+}
+
 void
 GlFramework::translate(GLfloat x, GLfloat y, GLfloat z)
 {

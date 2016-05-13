@@ -3,3 +3,12 @@
 ParticleSystem::ParticleSystem()
 {
 }
+
+ParticleSystem::~ParticleSystem(){
+
+}
+
+void
+ParticleSystem::drawShape(){
+
+}

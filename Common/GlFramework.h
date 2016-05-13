@@ -60,6 +60,8 @@ class GlFramework : public AbstractFramework
         void lookAt(GLfloat eyeX, GLfloat eyeY, GLfloat eyeZ, GLfloat targetX, GLfloat targetY, GLfloat targetZ, GLfloat upX = 0.0f, GLfloat upY = 1.0f, GLfloat upZ = 0.0f);
 
 
+        void addCustomTransform(GLMatrix trans);
+
     protected:
 		/*!
 		*\brief Fonction de chargement d'un shader.

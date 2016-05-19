@@ -1,1 +1,4 @@
 glew-mingw/
+*.pro
+Template/obj
+*.o

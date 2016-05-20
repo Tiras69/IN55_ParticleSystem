@@ -13,7 +13,7 @@ public:
     SphereEmitter(float rad);
     float radius;
 
-    ParticleTransform * getNewParticleTransform();
+    ParticleTransform * setNewParticleTransform(ParticleTransform * transf);
 };
 
 #endif // SPHEREEMITTER_H

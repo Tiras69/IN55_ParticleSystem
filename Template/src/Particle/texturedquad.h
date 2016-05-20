@@ -12,13 +12,21 @@ public:
     TexturedQuad();
 
     GLfloat opacity;
+
+    void initGLFrame();
+
+    void closeGLFrame();
 protected:
     void drawShape();
 
 
 
+
 private :
 
+    GLint colorLoc;
+    GLint positionLoc;
+    GLint UVLoc;
 
 };
 

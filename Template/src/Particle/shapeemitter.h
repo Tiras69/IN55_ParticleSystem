@@ -1,4 +1,4 @@
-#ifndef SHAPEEMITTER_H
+﻿#ifndef SHAPEEMITTER_H
 #define SHAPEEMITTER_H
 
 #include "Vectors.h"
@@ -11,7 +11,7 @@ public:
 
     Vec3 position;
 
-    virtual ParticleTransform * getNewParticleTransform()=0;
+    virtual ParticleTransform * setNewParticleTransform(ParticleTransform * transf)=0;
 
 };
 

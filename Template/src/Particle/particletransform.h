@@ -3,12 +3,13 @@
 
 #include "GlFramework.h"
 #include "Vectors.h"
+#include "camera.h"
 
 class ParticleTransform
 {
 
 public:
-    ParticleTransform(Vec3 _initPos, Vec3 _direction, float _speed);
+    ParticleTransform(Vec3 _initPos, Vec3 _direction, float _speed, Camera * _camera);
 
     bool isEnable;
     float lifeTime;
@@ -19,12 +20,12 @@ public:
     float speed;
 
     Vec3 position;
-    Vec3 * CameraPosition;
+    Camera * camera;
     GLMatrix ModelMatrix;
 
     void Update(float deltaTime);
     void setLifeTime(float time);
-    void Start();
+    void Start(Vec3 _initPos, Vec3 _direction, float _speed);
     void Pause();
 };
 

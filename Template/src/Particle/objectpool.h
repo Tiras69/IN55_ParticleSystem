@@ -7,14 +7,18 @@
 class ObjectPool
 {
 public:
-    ObjectPool(int n);
+    ObjectPool(int n, Camera * _camera);
 
     ParticleTransform* getObject();
 
+    std::vector<ParticleTransform>::iterator LastIt;
+    std::vector<ParticleTransform> objects;
 
 private :
+    Camera * camera;
     int ObjectNumber;
-    std::vector<ParticleTransform> objects;
+
+
 };
 
 #endif // OBJECTPOOL_H

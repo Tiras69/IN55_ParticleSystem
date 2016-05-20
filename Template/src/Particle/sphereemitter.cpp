@@ -1,5 +1,7 @@
 #include "sphereemitter.h"
 
+#include<iostream>
+
 SphereEmitter::SphereEmitter()
 {
     position = Vec3(0.0f, 0.0f, 0.0f);
@@ -12,14 +14,19 @@ SphereEmitter::SphereEmitter(float rad):SphereEmitter(){
 }
 
 ParticleTransform *
-SphereEmitter::getNewParticleTransform(){
-    float x = ((fmod(rand() ,radius * 2)) - radius);
-    float y = ((fmod(rand() ,radius * 2)) - radius);
-    float z = ((fmod(rand() ,radius * 2)) - radius);
+SphereEmitter::setNewParticleTransform(ParticleTransform * transf){
+    //std::cout << "new Particle ? " << transf << std::endl;
+
+    float x = ((fmod(rand() ,radius * 2.0f * 10.f)) - radius * 10.0f);
+    float y = ((fmod(rand() ,radius * 2.0f * 10.f)) - radius * 10.0f);
+    float z = ((fmod(rand() ,radius * 2.0f * 10.f)) - radius * 10.0f);
     Vec3 direction = Vec3(x, y, z);
     Vec3 pos = position + direction;
     direction.normalize();
+    std::cout << "dir " << direction.x << " " << direction.y << " " << direction.z << std::endl;
 
-    return new ParticleTransform(pos, direction, 1.0f);
+    transf->Start(pos, direction, 4.0f);
+
+    return transf;
 
 }

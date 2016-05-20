@@ -30,7 +30,7 @@ TexturedQuad::TexturedQuad()
     for(int i = 0 ; i < 6*2 ; i++)
         UVCoordinates[i] = tmpUVCoordinates[i];
 
-    opacity = 0.1f;
+    opacity = 0.3f;
 
     /* Gen Texture */
     glGenTextures(1, &texID);
@@ -59,6 +59,13 @@ TexturedQuad::TexturedQuad()
 }
 
 void TexturedQuad::drawShape(){
+    //initGLFrame();
+                glDrawElements(GL_TRIANGLES, 2*3, GL_UNSIGNED_INT, tabIndices);
+    //closeGLFrame();
+}
+
+void
+TexturedQuad::initGLFrame(){
     /* ALPHA STUFF */
     glDisable(GL_CULL_FACE);
     glEnable(GL_BLEND);
@@ -68,13 +75,13 @@ void TexturedQuad::drawShape(){
     GLint opacityLoc = glGetUniformLocation(m_Framework->getCurrentShaderId(), "opacity");
     glUniform1f(opacityLoc, opacity);
 
-    GLint UVLoc = glGetAttribLocation(m_Framework->getCurrentShaderId(), "texcoord");
+    UVLoc = glGetAttribLocation(m_Framework->getCurrentShaderId(), "texcoord");
     glVertexAttribPointer(UVLoc, 2, GL_FLOAT, GL_FALSE, 0, UVCoordinates);
     glEnableVertexAttribArray(UVLoc);
 
         /* VERTEX COLOR STUFF */
-        GLint positionLoc = glGetAttribLocation(m_Framework->getCurrentShaderId(), "position");
-        GLint colorLoc = glGetAttribLocation(m_Framework->getCurrentShaderId(), "color");
+        positionLoc = glGetAttribLocation(m_Framework->getCurrentShaderId(), "position");
+        colorLoc = glGetAttribLocation(m_Framework->getCurrentShaderId(), "color");
 
         glVertexAttribPointer(positionLoc, 3, GL_FLOAT, GL_FALSE, 0, tabVertices);
         glEnableVertexAttribArray(positionLoc);
@@ -96,14 +103,16 @@ void TexturedQuad::drawShape(){
                              GL_RGBA,
                              GL_UNSIGNED_BYTE,
                              image);
+}
 
-                glDrawElements(GL_TRIANGLES, 2*3, GL_UNSIGNED_INT, tabIndices);
-            glBindTexture(GL_TEXTURE_2D, 0);
+void
+TexturedQuad::closeGLFrame(){
+    glBindTexture(GL_TEXTURE_2D, 0);
 
-            glDisableVertexAttribArray(colorLoc);
+    glDisableVertexAttribArray(colorLoc);
 
-        glDisableVertexAttribArray(positionLoc);
+glDisableVertexAttribArray(positionLoc);
 
-    glDisableVertexAttribArray(UVLoc);
+glDisableVertexAttribArray(UVLoc);
 
 }

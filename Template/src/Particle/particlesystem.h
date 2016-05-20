@@ -5,18 +5,29 @@
 #include "objectpool.h"
 #include "shapeemitter.h"
 #include "renderer.h"
+#include "camera.h"
+#include "texturedquad.h"
 
-class ParticleSystem : public Object3D
+#include <cmath>
+
+class ParticleSystem /*: public Object3D*/
 {
 public:
-    ParticleSystem();
+    ParticleSystem(ShapeEmitter * _emitter, int numberParticles,float emitRate, TexturedQuad * _renderer, Camera * _cam);
     ~ParticleSystem();
 
-private:
     ShapeEmitter * emitter;
     ObjectPool * pool;
-    Renderer * renderer;
-    void drawShape();
+    TexturedQuad * renderer;
+    Camera * camera;
+
+    float EmitRate;
+    float timer;
+
+    void Update(float deltaTime);
+    /*void drawShape();
+    void initGLFrame();
+    void closeGLFrame();*/
 };
 
 #endif // PARTICLESYSTEM_H

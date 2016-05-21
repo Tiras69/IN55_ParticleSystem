@@ -11,6 +11,14 @@ class ParticleTransform
 public:
     ParticleTransform(Vec3 _initPos, Vec3 _direction, float _speed, Camera * _camera);
 
+    void calculateDistance();
+    bool operator < (const ParticleTransform & transf) const;
+
+    void Update(float deltaTime);
+    void setLifeTime(float time);
+    void Start(Vec3 _initPos, Vec3 _direction, float _speed, float _gravity);
+    void Pause();
+
     bool isEnable;
     float lifeTime;
     float currentLifeTime;
@@ -18,15 +26,16 @@ public:
     Vec3 initialPosition;
     Vec3 direction;
     float speed;
+    float distance;
+
 
     Vec3 position;
     Camera * camera;
     GLMatrix ModelMatrix;
 
-    void Update(float deltaTime);
-    void setLifeTime(float time);
-    void Start(Vec3 _initPos, Vec3 _direction, float _speed);
-    void Pause();
+private:
+
+    float m_gravity;
 };
 
 #endif // PARTICLETRANSFORM_H

@@ -13,9 +13,9 @@ using namespace std;
 ParticleWindow::ParticleWindow()
 {
     camera = new Camera(00.0f, 5.0f, 30.0f, 4.0f/3.0f, 0.3f, 1000.0f, 60.0f);
-    particleSystem = new ParticleSystem(new SphereEmitter(2.0f),
-                                        10000,
-                                        100.0f,
+    particleSystem = new ParticleSystem(new SphereEmitter(10.0f),
+                                        100000,
+                                        1000.0f,
                                         new TexturedQuad(),
                                         camera);
     //quad = new TexturedQuad();
@@ -85,9 +85,13 @@ void ParticleWindow::render(){
         std::vector<ParticleTransform>::iterator iterator;
         particleSystem->Update(frameRate);
 
+        // We sort the particules:
+        std::sort(particleSystem->pool->objects.begin(), particleSystem->pool->objects.end());
+
+
         particleSystem->renderer->initGLFrame();
         for(iterator = particleSystem->pool->objects.begin() ; iterator != particleSystem->pool->objects.end(); iterator++){
-            //std::cout << "pos : " << (*iterator).position.x << " " << (*iterator).position.y << " " << (*iterator).position.z << std::endl;
+            //std::cout << "distance : " << (*iterator).distance << std::endl;
             if((*iterator).isEnable){
                 (*iterator).Update(frameRate);
                 pushMatrix();

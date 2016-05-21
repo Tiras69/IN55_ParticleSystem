@@ -13,7 +13,7 @@ ParticleTransform::ParticleTransform(Vec3 _initPos, Vec3 _direction, float _spee
     position = _initPos;
     direction = _direction;
     speed = _speed;
-
+    distance = -1.0f;
 
 }
 
@@ -25,8 +25,11 @@ void ParticleTransform::Update(float deltaTime){
     }
 
     if(isEnable){
+        //std::cout << "gravity : " << m_gravity << std::endl;
+        direction = direction + (Vec3(0.0f, -m_gravity, 0.0f) * deltaTime);
         position = position + (direction * deltaTime * speed);
 
+        calculateDistance();
 
 
         ModelMatrix.m[0][0] = 1.0f; ModelMatrix.m[0][1] = 0.0f; ModelMatrix.m[0][2] = 0.0f; ModelMatrix.m[0][3] = position.x;
@@ -40,19 +43,35 @@ void ParticleTransform::setLifeTime(float time){
     lifeTime = time;
 }
 
-void ParticleTransform::Start(Vec3 _initPos, Vec3 _direction, float _speed){
+void ParticleTransform::Start(Vec3 _initPos, Vec3 _direction, float _speed, float _gravity){
     isEnable = true;
     currentLifeTime = 0.0f;
 
     initialPosition = _initPos;
     position = initialPosition;
+    calculateDistance();
 
     direction = _direction;
     speed = _speed;
-
+    //std::cout << "gravity : " << m_gravity << std::endl;
+    m_gravity = _gravity;
 }
 
 void ParticleTransform::Pause(){
     isEnable = false;
+    distance = -1.0f;
+}
 
+void
+ParticleTransform::calculateDistance(){
+    float x = camera->getPosition().x - position.x;
+    float y = camera->getPosition().y - position.y;
+    float z = camera->getPosition().z - position.z;
+
+    distance = x*x + y*y + z*z;
+}
+
+bool
+ParticleTransform::operator <(const ParticleTransform & transf) const{
+    return (distance > transf.distance);
 }

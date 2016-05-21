@@ -38,6 +38,11 @@ void Camera::translate(float x, float y, float z){
 
 }
 
+Vec3
+Camera::getPosition(){
+    return m_position;
+}
+
 void Camera::translateX(float shift){
     m_position.x += shift;
 }

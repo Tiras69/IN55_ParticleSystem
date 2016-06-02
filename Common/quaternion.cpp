@@ -50,6 +50,8 @@ Quaternion Quaternion::operator*(Quaternion const& q1){
 
 }
 
+
+
 Vec3 Quaternion::operator*(Vec3 const& v1){
     Quaternion point = Quaternion(0, v1.x, v1.y, v1.z);
 
@@ -62,6 +64,8 @@ Vec3 Quaternion::operator*(Vec3 const& v1){
 
     return vRes;
 }
+
+
 
 Quaternion Quaternion::operator*(float f){
     Quaternion tmpQuat = Quaternion();
@@ -120,10 +124,14 @@ void Quaternion::set(float _w, float _x, float _y, float _z){
 }
 
 void Quaternion::setFromAxis(float angle, float _x, float _y, float _z){
-    w = cos( angle / 2.0d );
-    x = _x*sin( angle / 2.0d );
-    y = _y*sin( angle / 2.0d );
-    z = _z*sin( angle / 2.0d );
+    Vec3 v = Vec3(_x, _y, _z);
+    v.normalize();
+
+    w = cos( angle / 2.0d ) ;
+    x = v.x*sin( angle / 2.0d ) ;
+    y = v.y*sin( angle / 2.0d ) ;
+    z = v.z*sin( angle / 2.0d ) ;
+    normalize();
 }
 
 Quaternion Quaternion::conjugate(){
@@ -153,8 +161,10 @@ void Quaternion::normalize(){
 void Quaternion::setRotationMatrix(float* mat){
     // We verify if the matrix is null if it's the case we delete it.
 
-    mat[0] = 1.0f - 2.0f*y*y - 2.0f*z*z  ; mat[4] = 2.0f*x*y - 2.0f*w*z           ; mat[8] = 2.0f*x*z + 2.0f*w*y           ; mat[12] = 0.0f ;
-    mat[1] = 2.0f*x*y + 2.0f*w*z         ; mat[5] = 1.0f - 2.0f*x*x - 2.0f*z*z    ; mat[9] = 2.0f*y*z - 2.0f*w*x           ; mat[13] = 0.0f ;
-    mat[2] = 2.0f*x*z - 2.0f*w*y         ; mat[6] = 2.0f*y*z + 2.0f*w*x           ; mat[10] = 1.0f - 2.0f*x*x - 2.0f*y*y   ; mat[14] = 0.0f ;
-    mat[3] = 0.0f                        ; mat[7] = 0.0f                          ; mat[11] = 0.0f                         ; mat[15] = 1.0f ;
+    mat[0] = 1.0f - (2.0f*y*y) - (2.0f*z*z)  ; mat[4] = (2.0f*x*y) - (2.0f*w*z)        ; mat[8] = (2.0f*x*z) + (2.0f*w*y)         ; mat[12] = 0.0f ;
+    mat[1] = (2.0f*x*y) + (2.0f*w*z)         ; mat[5] = 1.0f - (2.0f*x*x) - (2.0f*z*z) ; mat[9] = (2.0f*y*z) - (2.0f*w*x)         ; mat[13] = 0.0f ;
+    mat[2] = (2.0f*x*z) - (2.0f*w*y)         ; mat[6] = (2.0f*y*z) + (2.0f*w*x)        ; mat[10] = 1.0f - (2.0f*x*x) - (2.0f*y*y) ; mat[14] = 0.0f ;
+    mat[3] = 0.0f                            ; mat[7] = 0.0f                           ; mat[11] = 0.0f                           ; mat[15] = 1.0f ;
 }
+
+

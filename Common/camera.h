@@ -26,14 +26,20 @@ public:
     void setFOV(float angle);
     GLMatrix const& getProjectionMatrix();
 
+
+    Quaternion m_Orientation;
+    Vec3 forward;
+    Vec3 right;
+    Vec3 up;
+
 protected:
     void buildViewMatrix();
     void buildProjectionMatrix();
 
 private:
+    void updateVectors();
 
     Vec3 m_position;
-    Quaternion m_Orientation;
     GLMatrix m_ViewMatrix;
     GLMatrix m_ProjectionMatrix;
 

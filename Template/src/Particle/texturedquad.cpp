@@ -37,7 +37,7 @@ TexturedQuad::TexturedQuad()
     std::cout << glGetError() << std::endl;
     glBindTexture(GL_TEXTURE_2D, texID);
     std::cout << glGetError() << std::endl;
-    image = SOIL_load_image("sample.png",
+    image = SOIL_load_image("FireParticleSingleTexture.png",
                             &imageWidth,
                             &imageHeight,
                             0,

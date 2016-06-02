@@ -1,9 +1,12 @@
 #ifndef PARTICLETRANSFORM_H
 #define PARTICLETRANSFORM_H
 
+#include <time.h>
+#include <stdlib.h>
 #include "GlFramework.h"
 #include "Vectors.h"
 #include "camera.h"
+
 
 class ParticleTransform
 {
@@ -27,7 +30,8 @@ public:
     Vec3 direction;
     float speed;
     float distance;
-
+    float torque;
+    float currentRotationZ;
 
     Vec3 position;
     Camera * camera;

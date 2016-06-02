@@ -10,5 +10,6 @@ out vec4 fragColor;
 
 void main()
 {
-  fragColor = vec4(texture(image, TexCoord).rgb * fColor.rgb, opacity);
+  fragColor = texture2D(image, TexCoord);
+  //fragColor = vec4(texture(image, TexCoord).rgb * fColor.rgb, opacity);
 }

@@ -1,51 +1,74 @@
 #include "particlewindow.h"
 #include "Particle/particletransform.h"
 #include "Particle/sphereemitter.h"
+#include "Particle/coneemitter.h"
 
 #include <unistd.h>
 #include <iostream>
 
 using namespace std;
 
-//ParticleTransform * ref_transf;
-//SphereEmitter * sphereEmitter;
 
 ParticleWindow::ParticleWindow()
 {
-    camera = new Camera(00.0f, 5.0f, 30.0f, 4.0f/3.0f, 0.3f, 1000.0f, 60.0f);
-    particleSystem = new ParticleSystem(new SphereEmitter(10.0f),
+    camera = new Camera(00.0f, 0.0f, 100.0f, 4.0f/3.0f, 0.3f, 1000.0f, 60.0f);
+    particleSystem = new ParticleSystem(new ConeEmitter(1.0f, 10.0f, 20.0f),
                                         100000,
                                         1000.0f,
                                         new TexturedQuad(),
                                         camera);
-    //quad = new TexturedQuad();
 
-    //pool = new ObjectPool(1, camera);
-
-    //sphereEmitter = new SphereEmitter(2.0f);
-
-    //ref_transf = pool->getObject();
-    //sphereEmitter->setNewParticleTransform(ref_transf);
+    isForwardPressed = false;
+    isLeftPressed = false;
+    isRightPressed = false;
+    isDownPressed = false;
 
 
     timeStart = clock();
+
+    QCursor::setPos(this->geometry().x() + (this->geometry().width() / 2.0f),
+                    this->geometry().y() + (this->geometry().height() / 2.0f) );
+    lastMousePostion = Vec2((float)QCursor::pos().x(), (float)QCursor::pos().y());
+
+
 }
 
 ParticleWindow::~ParticleWindow(){
     delete camera;
-    //delete quad;
-    //delete pool;
 }
 
-void ParticleWindow::keyPressEvent(QKeyEvent *event){
-    switch(event->key()){
-        case Qt::Key_Up:
-            //quad->opacity += 0.1f;
-            break;
-        case Qt::Key_Down:
-            //quad->opacity -= 0.1f;
-            break;
 
+void ParticleWindow::keyPressEvent(QKeyEvent *event){
+    if(!isForwardPressed && (event->key() == Qt::Key_Up || event->key() == Qt::Key_Z)){
+        isForwardPressed = true;
+    }
+    if(!isLeftPressed && (event->key() == Qt::Key_Left || event->key() == Qt::Key_Q)){
+        isLeftPressed = true;
+    }
+    if(!isRightPressed && (event->key() == Qt::Key_Right || event->key() == Qt::Key_D)){
+        isRightPressed = true;
+    }
+    if(!isDownPressed && (event->key() == Qt::Key_Down || event->key() == Qt::Key_S)){
+        isDownPressed = true;
+    }
+    if(event->key() == Qt::Key_Escape)
+        this->close();
+    if(event->key() == Qt::Key_G)
+        camera->rotateY(M_PI / 2.0f);
+}
+
+void ParticleWindow::keyReleaseEvent(QKeyEvent *event){
+    if(isForwardPressed && (event->key() == Qt::Key_Up || event->key() == Qt::Key_Z)){
+        isForwardPressed = false;
+    }
+    if(isLeftPressed && (event->key() == Qt::Key_Left || event->key() == Qt::Key_Q)){
+        isLeftPressed = false;
+    }
+    if(isRightPressed && (event->key() == Qt::Key_Right || event->key() == Qt::Key_D)){
+        isRightPressed = false;
+    }
+    if(isDownPressed && (event->key() == Qt::Key_Down || event->key() == Qt::Key_S)){
+        isDownPressed = false;
     }
 }
 
@@ -75,10 +98,50 @@ bool ParticleWindow::initializeObjects(){
 void ParticleWindow::render(){
     timeStart = clock();
 
+    pViewMatrix = camera->getViewMatrix();
+    pProjMatrix = camera->getProjectionMatrix();
+
+    //Vec3 camDirVect = Vec3(0.0f, 0.0f, 0.0f);
+    // Update Camera.
+
+    if(isForwardPressed)
+        camera->translateZ(cameraSpeed * frameRate);
+    if(isRightPressed)
+        camera->translateX(-cameraSpeed * frameRate);
+    if(isLeftPressed)
+        camera->translateX(cameraSpeed * frameRate);
+    if(isDownPressed)
+        camera->translateZ(-cameraSpeed * frameRate);
+
+
+    Vec2 currentMousePosition;
+    if(this->geometry().contains(QCursor::pos()))
+        currentMousePosition = Vec2((float)QCursor::pos().x(), (float)QCursor::pos().y());
+    else
+        currentMousePosition = lastMousePostion;
+
+    float mDirx = lastMousePostion.x - currentMousePosition.x;
+    float mDiry = lastMousePostion.y - currentMousePosition.y;
+
+
+    camera->rotateX(mDiry * mouseSensibility * frameRate);
+    camera->rotateY(mDirx * mouseSensibility * frameRate);
+
+    /*camera->rotate(mDiry * mouseSensibility * frameRate,
+                   camera->right.x,
+                   camera->right.y,
+                   camera->right.z);*/
+
+
+
+    lastMousePostion = currentMousePosition;
+
 
     //lookAt(0, 5, -30, 0, 0, 0);
     pViewMatrix = camera->getViewMatrix();
     pProjMatrix = camera->getProjectionMatrix();
+
+
 
     pushMatrix();
 

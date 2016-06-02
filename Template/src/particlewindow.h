@@ -21,9 +21,13 @@ public:
     void render();
 
     void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
 private:
 
     float frameRate = 1.0f/30.0f;
+    float cameraSpeed = 20.0f;
+    float mouseSensibility = 0.3f;
+
     clock_t timeStart;
     clock_t timeEnd;
 
@@ -32,6 +36,16 @@ private:
     ObjectPool * pool;
 
     ParticleSystem * particleSystem;
+
+    // Variable Used to check if a direction is pushed
+    bool isForwardPressed;
+    bool isLeftPressed;
+    bool isRightPressed;
+    bool isDownPressed;
+
+    Vec2 lastMousePostion;
+
+
 };
 
 #endif // PARTICLEWINDOW_H

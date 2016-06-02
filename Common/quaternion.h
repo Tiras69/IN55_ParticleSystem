@@ -24,12 +24,13 @@ public:
     void normalize();
     void setRotationMatrix(float* mat);
 
-
-private:
     float w;
     float x;
     float y;
     float z;
+
+//private:
+
 };
 
 #endif // QUATERNION_H

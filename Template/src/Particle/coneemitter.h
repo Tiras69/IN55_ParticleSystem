@@ -9,7 +9,7 @@
 class ConeEmitter : public ShapeEmitter
 {
 public:
-    ConeEmitter(float downRadius, float upRadius, float height, float spawnHeight);
+    ConeEmitter(float downRadius, float upRadius, float height);
     ParticleTransform * setNewParticleTransform(ParticleTransform * transf);
 
 private:
@@ -17,7 +17,6 @@ private:
     float m_downRadius;
     float m_upRadius;
     float m_height;
-    float m_spawnHeight;
 
 
 

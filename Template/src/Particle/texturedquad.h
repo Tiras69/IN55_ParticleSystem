@@ -5,11 +5,15 @@
 #include "./Object3D.h"
 #include "renderer.h"
 
+#include <string>
+#include <stdio.h>
+#include <QDir>
+#include <iostream>
 
 class TexturedQuad : public Renderer, public Object3D
 {
 public:
-    TexturedQuad();
+    TexturedQuad(std::string texName);
 
     GLfloat opacity;
 

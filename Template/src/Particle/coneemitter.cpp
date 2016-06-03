@@ -1,10 +1,12 @@
 #include "coneemitter.h"
 
-ConeEmitter::ConeEmitter(float downRadius, float upRadius, float height)
+ConeEmitter::ConeEmitter(float downRadius, float upRadius, float height, float _speed, float _gravity)
 {
     m_downRadius = downRadius;
     m_upRadius = upRadius;
     m_height = height;
+    particuleSpeed = _speed;
+    gravity = _gravity;
     // Init the random seed.
     srand(time(NULL));
 }
@@ -32,7 +34,7 @@ ConeEmitter::setNewParticleTransform(ParticleTransform * transf){
     dirVect = dirVect - initPos;
     dirVect.normalize();
 
-    transf->Start(initPos, dirVect, 30.0f, 0.5f);
+    transf->Start(initPos, dirVect, particuleSpeed, gravity);
 
     return transf;
 }

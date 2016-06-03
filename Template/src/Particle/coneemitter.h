@@ -6,10 +6,11 @@
 #include <stdlib.h>
 #include <time.h>
 
+
 class ConeEmitter : public ShapeEmitter
 {
 public:
-    ConeEmitter(float downRadius, float upRadius, float height);
+    ConeEmitter(float downRadius, float upRadius, float height, float _speed, float _gravity);
     ParticleTransform * setNewParticleTransform(ParticleTransform * transf);
 
 private:
@@ -18,7 +19,8 @@ private:
     float m_upRadius;
     float m_height;
 
-
+    float particuleSpeed;
+    float gravity;
 
 };
 

@@ -1,7 +1,5 @@
 #include "sphereemitter.h"
 
-#include<iostream>
-
 SphereEmitter::SphereEmitter()
 {
     position = Vec3(0.0f, 0.0f, 0.0f);

@@ -1,21 +1,24 @@
 #include "particlewindow.h"
-#include "Particle/particletransform.h"
-#include "Particle/sphereemitter.h"
-#include "Particle/coneemitter.h"
 
-#include <unistd.h>
-#include <iostream>
+
+
+
 
 using namespace std;
 
 
 ParticleWindow::ParticleWindow()
 {
+
+    setWindowTitle(trUtf8("Particle system"));
+
+    ShapeEmitter * emitter = importJSON();
+
     camera = new Camera(00.0f, 0.0f, 100.0f, 4.0f/3.0f, 0.3f, 1000.0f, 60.0f);
-    particleSystem = new ParticleSystem(new ConeEmitter(1.0f, 10.0f, 20.0f),
-                                        100000,
-                                        1000.0f,
-                                        new TexturedQuad(),
+    particleSystem = new ParticleSystem(emitter,
+                                        numPart,
+                                        rate,
+                                        new TexturedQuad(texName),
                                         camera);
 
     isForwardPressed = false;
@@ -37,6 +40,36 @@ ParticleWindow::~ParticleWindow(){
     delete camera;
 }
 
+ShapeEmitter *
+ParticleWindow::importJSON(){
+
+    std::ifstream config_doc("ParticlesSystems/system1.json", std::ifstream::binary);
+
+    Json::Value root;
+
+    config_doc >> root;
+
+    Json::Value sys = root["ParticleSystem"];
+
+    numPart = sys["NumberOfParticles"].asInt();
+    rate = sys["Rate"].asInt();
+    texName = sys["TextureName"].asString();
+    float gravity = sys["Gravity"].asFloat();
+    float partSpeed = sys["ParticuleSpeed"].asFloat();
+
+    Json::Value emitter = sys["Emitter"];
+    std::string type = emitter["EmitterType"].asString();
+    if(type == "ConeEmitter"){
+        float baseCircle = emitter["BaseCircle"].asFloat();
+        float upCircle = emitter["UpCircle"].asFloat();
+        float length = emitter["Length"].asFloat();
+
+        return new ConeEmitter(baseCircle, upCircle, length, partSpeed, gravity);
+    }else if(type == "SphereEmitter"){
+        return NULL;
+    }
+    return NULL;
+}
 
 void ParticleWindow::keyPressEvent(QKeyEvent *event){
     if(!isForwardPressed && (event->key() == Qt::Key_Up || event->key() == Qt::Key_Z)){
@@ -127,17 +160,8 @@ void ParticleWindow::render(){
     camera->rotateX(mDiry * mouseSensibility * frameRate);
     camera->rotateY(mDirx * mouseSensibility * frameRate);
 
-    /*camera->rotate(mDiry * mouseSensibility * frameRate,
-                   camera->right.x,
-                   camera->right.y,
-                   camera->right.z);*/
-
-
-
     lastMousePostion = currentMousePosition;
 
-
-    //lookAt(0, 5, -30, 0, 0, 0);
     pViewMatrix = camera->getViewMatrix();
     pProjMatrix = camera->getProjectionMatrix();
 
@@ -166,25 +190,10 @@ void ParticleWindow::render(){
         }
         particleSystem->renderer->closeGLFrame();
 
-
-//        addCustomTransform(ref_transf->ModelMatrix);
-
-//        if(ref_transf->isEnable){
-//            quad->draw();
-//        }else{
-
-//            sphereEmitter->setNewParticleTransform(ref_transf);
-
-//            //ref_transf = sphereEmitter->getNewParticleTransform();
-//            //ref_transf->Start();
-//        }
-
-//        ref_transf->Update(1.0f/30.f);
     popMatrix();
 
     timeEnd = clock();
     clock_t frameTime = timeEnd - timeStart;
-    //float frameRate = 1.0f / 30.0f;
     float framefTime = ((float)frameTime) / CLOCKS_PER_SEC;
 
     if(framefTime < frameRate)

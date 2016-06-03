@@ -1,9 +1,6 @@
 #include "texturedquad.h"
-#include <iostream>
-#include <stdio.h>
-#include <QDir>
 
-TexturedQuad::TexturedQuad()
+TexturedQuad::TexturedQuad(std::string texName)
 {
     /* Vertices Stuff */
     GLfloat tmptabVertices[] = {1.0f, 1.0f, 0.0f,  -1.0f, 1.0f, 0.0f,  -1.0f, -1.0f, 0.0f,
@@ -37,7 +34,7 @@ TexturedQuad::TexturedQuad()
     std::cout << glGetError() << std::endl;
     glBindTexture(GL_TEXTURE_2D, texID);
     std::cout << glGetError() << std::endl;
-    image = SOIL_load_image("FireParticleSingleTexture.png",
+    image = SOIL_load_image(texName.c_str(),
                             &imageWidth,
                             &imageHeight,
                             0,
@@ -53,7 +50,6 @@ TexturedQuad::TexturedQuad()
                  GL_UNSIGNED_BYTE,
                  image);
     std::cout << glGetError() << std::endl;
-    //SOIL_free_image_data(image);
 
 
 }

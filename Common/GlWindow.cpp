@@ -1,6 +1,6 @@
 ﻿//*****************************************************************************
 //
-// Program: TP01 (IN55)
+// Program: (IN55)
 // Author: Fabrice LAURI (fabrice.lauri@utbm.fr)
 //          (Associate Professor at the
 //          "Université de Technologie de Belfort-Montbéliard", France)

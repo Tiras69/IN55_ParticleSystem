@@ -43,7 +43,9 @@ HEADERS += \
     src/SOIL/SOIL.h \
     src/SOIL/stbi_DDS_aug.h \
     src/SOIL/stbi_DDS_aug_c.h \
-    src/SOIL/stb_image_aug.h
+    src/SOIL/stb_image_aug.h \
+    src/Json/json/json.h \
+    src/Json/json/json-forwards.h
 
 
 SOURCES += \
@@ -73,7 +75,8 @@ SOURCES += \
     src/SOIL/image_DXT.c \
     src/SOIL/image_helper.c \
     src/SOIL/SOIL.c \
-    src/SOIL/stb_image_aug.c
+    src/SOIL/stb_image_aug.c \
+    src/Json/jsoncpp.cpp
 
 
 unix:!macx: LIBS += -L$$PWD/../glew-mingw/lib/ -lGLEW

@@ -4,17 +4,26 @@
 #include "GlWindow.h"
 #include "Particle/texturedquad.h"
 #include "Particle/objectpool.h"
-#include "Particle/particletransform.h"
+//#include "Particle/particletransform.h"
 #include "Particle/particlesystem.h"
+//#include "Particle/sphereemitter.h"
+#include "Particle/coneemitter.h"
 #include "camera.h"
 
 #include<time.h>
+#include <fstream>
+#include <Json/json/json.h>
+#include <string>
+#include <unistd.h>
 
 class ParticleWindow : public GlWindow
 {
 public:
     ParticleWindow();
     ~ParticleWindow();
+
+
+    ShapeEmitter * importJSON();
 
     bool initializeObjects();
 
@@ -23,6 +32,10 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 private:
+
+    int numPart;
+    int rate;
+    std::string texName;
 
     float frameRate = 1.0f/30.0f;
     float cameraSpeed = 20.0f;

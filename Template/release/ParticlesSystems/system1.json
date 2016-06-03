@@ -1,0 +1,15 @@
+{
+	"ParticleSystem": {
+		"NumberOfParticles": 10000,
+		"Rate": 100,
+		"Emitter": {
+			"EmitterType": "ConeEmitter",
+			"BaseCircle": 1.0,
+			"UpCircle": 10.0,
+			"Length": 20.0
+		},
+		"TextureName": "FireParticleSingleTexture.png",
+		"Gravity": 1,
+		"ParticuleSpeed": 31.0
+	}
+}

@@ -6,13 +6,15 @@
 #include "GlFramework.h"
 #include "Vectors.h"
 #include "camera.h"
-
+//#include "shapeemitter.h"
 
 class ParticleTransform
 {
 
 public:
     ParticleTransform(Vec3 _initPos, Vec3 _direction, float _speed, Camera * _camera);
+
+
 
     void calculateDistance();
     bool operator < (const ParticleTransform & transf) const;

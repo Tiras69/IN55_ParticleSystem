@@ -1,6 +1,5 @@
 #include "particletransform.h"
 
-#include <iostream>
 // <3
 ParticleTransform::ParticleTransform(Vec3 _initPos, Vec3 _direction, float _speed, Camera * _camera)
 {
@@ -31,7 +30,6 @@ void ParticleTransform::Update(float deltaTime){
     }
 
     if(isEnable){
-        //std::cout << "gravity : " << m_gravity << std::endl;
         direction = (direction * speed  + Vec3(0.0f, -m_gravity, 0.0f)) * deltaTime;
         position = position + direction;
 
@@ -52,10 +50,10 @@ void ParticleTransform::Update(float deltaTime){
         delete tmpMatRot;
 
         GLMatrix rotMatrix = GLMatrix();
-        rotMatrix.m[0][0] = cos(currentRotationZ) ; rotMatrix.m[0][1] = -sin(currentRotationZ) ; rotMatrix.m[0][2] = 0.0f; rotMatrix.m[0][3] = 0.0f;
-        rotMatrix.m[1][0] = sin(currentRotationZ); rotMatrix.m[1][1] = cos(currentRotationZ)  ; rotMatrix.m[1][2] = 0.0f; rotMatrix.m[1][3] = 0.0f;
-        rotMatrix.m[2][0] = 0.0f; rotMatrix.m[2][1] = 0.0f ; rotMatrix.m[2][2] = 1.0f; rotMatrix.m[2][3] = 0.0f;
-        rotMatrix.m[3][0] = 0.0f                  ; rotMatrix.m[3][1] = 0.0f                   ; rotMatrix.m[3][2] = 0.0f; rotMatrix.m[3][3] = 1.0f;
+        rotMatrix.m[0][0] = cos(currentRotationZ) ; rotMatrix.m[0][1] = -sin(currentRotationZ) ; rotMatrix.m[0][2] = 0.0f ; rotMatrix.m[0][3] = 0.0f ;
+        rotMatrix.m[1][0] = sin(currentRotationZ) ; rotMatrix.m[1][1] = cos(currentRotationZ)  ; rotMatrix.m[1][2] = 0.0f ; rotMatrix.m[1][3] = 0.0f ;
+        rotMatrix.m[2][0] = 0.0f                  ; rotMatrix.m[2][1] = 0.0f                   ; rotMatrix.m[2][2] = 1.0f ; rotMatrix.m[2][3] = 0.0f ;
+        rotMatrix.m[3][0] = 0.0f                  ; rotMatrix.m[3][1] = 0.0f                   ; rotMatrix.m[3][2] = 0.0f ; rotMatrix.m[3][3] = 1.0f ;
 
         ModelMatrix.m[0][0] = 1.0f; ModelMatrix.m[0][1] = 0.0f; ModelMatrix.m[0][2] = 0.0f; ModelMatrix.m[0][3] = position.x;
         ModelMatrix.m[1][0] = 0.0f; ModelMatrix.m[1][1] = 1.0f; ModelMatrix.m[1][2] = 0.0f; ModelMatrix.m[1][3] = position.y;

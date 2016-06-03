@@ -1,5 +1,4 @@
 #include "particlesystem.h"
-#include<iostream>
 
 ParticleSystem::ParticleSystem(ShapeEmitter * _emitter, int numberParticles,float emitRate, TexturedQuad * _renderer, Camera * _cam)
 {

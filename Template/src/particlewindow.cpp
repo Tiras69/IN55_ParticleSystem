@@ -169,26 +169,26 @@ void ParticleWindow::render(){
 
     pushMatrix();
 
-        std::vector<ParticleTransform>::iterator iterator;
-        particleSystem->Update(frameRate);
+    std::vector<ParticleTransform>::iterator iterator;
+    particleSystem->Update(frameRate);
 
-        // We sort the particules:
-        std::sort(particleSystem->pool->objects.begin(), particleSystem->pool->objects.end());
+    // We sort the particules:
+    std::sort(particleSystem->pool->objects.begin(), particleSystem->pool->objects.end());
 
 
-        particleSystem->renderer->initGLFrame();
-        for(iterator = particleSystem->pool->objects.begin() ; iterator != particleSystem->pool->objects.end(); iterator++){
-            //std::cout << "distance : " << (*iterator).distance << std::endl;
-            if((*iterator).isEnable){
-                (*iterator).Update(frameRate);
-                pushMatrix();
-                    addCustomTransform((*iterator).ModelMatrix);
-                    //std::cout << "pos : " << (*iterator).position.x << " " << (*iterator).position.y << " " << (*iterator).position.z << std::endl;
-                    particleSystem->renderer->draw();
-                popMatrix();
-            }
+    particleSystem->renderer->initGLFrame();
+    for(iterator = particleSystem->pool->objects.begin() ; iterator != particleSystem->pool->objects.end(); iterator++){
+        //std::cout << "distance : " << (*iterator).distance << std::endl;
+        if((*iterator).isEnable){
+            (*iterator).Update(frameRate);
+            pushMatrix();
+            addCustomTransform((*iterator).ModelMatrix);
+            //std::cout << "pos : " << (*iterator).position.x << " " << (*iterator).position.y << " " << (*iterator).position.z << std::endl;
+            particleSystem->renderer->draw();
+            popMatrix();
         }
-        particleSystem->renderer->closeGLFrame();
+    }
+    particleSystem->renderer->closeGLFrame();
 
     popMatrix();
 

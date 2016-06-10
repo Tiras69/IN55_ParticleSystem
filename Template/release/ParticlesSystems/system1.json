@@ -1,15 +1,15 @@
 {
 	"ParticleSystem": {
 		"NumberOfParticles": 10000,
-		"Rate": 100,
+		"Rate": 1000,
 		"Emitter": {
 			"EmitterType": "ConeEmitter",
 			"BaseCircle": 1.0,
 			"UpCircle": 10.0,
 			"Length": 20.0
 		},
-		"TextureName": "FireParticleSingleTexture.png",
-		"Gravity": 1,
+		"TextureName": "dickButtng",
+		"Gravity": 0,
 		"ParticuleSpeed": 31.0
 	}
 }
